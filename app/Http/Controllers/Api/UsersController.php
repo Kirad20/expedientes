@@ -25,8 +25,10 @@ class UsersController extends Controller
 
         $users = User::search($search)
             ->latest()
-            ->paginate();
-
+            ->get();
+        foreach ($users as $user) {
+            $user->rol = $user->roles()->first()->name;
+        }
         return new UserCollection($users);
     }
 
@@ -44,7 +46,7 @@ class UsersController extends Controller
 
         $user = User::create($validated);
 
-        $user->syncRoles($request->roles);
+        $user->syncRoles([$request->rol]);
 
         return new UserResource($user);
     }

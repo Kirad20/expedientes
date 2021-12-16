@@ -28,8 +28,7 @@ class UserStoreRequest extends FormRequest
             'nombre' => ['required', 'max:50', 'string'],
             'email' => ['required', 'unique:users', 'email'],
             'password' => ['required'],
-            'apellido' => ['required', 'max:20', 'string'],
-            'roles' => 'array',
+            'rol' => 'string',
         ];
     }
 }
